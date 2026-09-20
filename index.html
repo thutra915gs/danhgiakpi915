@@ -1,623 +1,513 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hệ Thống Đánh Giá KPI Giáo Viên - Trường TH&THCS 915 Gia Sàng</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    @media print {
-      body * {
-        visibility: hidden;
-      }
-      #printArea, #printArea * {
-        visibility: visible;
-      }
-      #printArea {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        background: white !important;
-        color: black !important;
-      }
-      .no-print {
-        display: none !important;
-      }
-    }
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hệ Thống Đánh Giá KPI Giáo Viên - Trường TH&THCS 915 Gia Sàng</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printArea, #printArea * {
+        visibility: visible;
+      }
+      #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white !important;
+        color: black !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
 
-  <!-- Header Banner -->
-  <header class="bg-gradient-to-r from-blue-800 via-indigo-800 to-blue-900 text-white shadow-lg border-b-4 border-amber-400">
-    <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="flex items-center space-x-3">
-          <div class="bg-white p-2 rounded-full text-blue-800 shadow-md text-2xl">
-            <i class="fa-solid fa-school"></i>
-          </div>
-          <div>
-            <span class="text-xs tracking-wider uppercase font-semibold text-amber-300">UBND TỈNH THÁI NGUYÊN - NGÀNH GIÁO DỤC VÀ ĐÀO TẠO</span>
-            <h1 class="text-xl md:text-2xl font-bold tracking-tight uppercase">Phần Mềm Đánh Giá, Xếp Loại KPI Giáo Viên</h1>
-            <p class="text-sm text-blue-200">Đơn vị: Trường Tiểu học và THCS 915 Gia Sàng</p>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-2 no-print">
-          <button onclick="window.print()" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-4 py-2 rounded-lg shadow flex items-center gap-2 transition">
-            <i class="fa-solid fa-print"></i> In / Xuất PDF Báo Cáo
-          </button>
-          <button onclick="resetToDefault()" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 rounded-lg text-sm flex items-center gap-1 transition">
-            <i class="fa-solid fa-arrow-rotate-left"></i> Khôi phục mẫu
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- Header Banner -->
+  <header class="bg-gradient-to-r from-blue-800 via-indigo-800 to-blue-900 text-white shadow-lg border-b-4 border-amber-400">
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center space-x-3">
+          <!-- Logo chính thức Trường TH&THCS 915 Gia Sàng -->
+          <div class="bg-white p-1 rounded-full shadow-md flex items-center justify-center border-2 border-amber-300 w-16 h-16 flex-shrink-0">
+            <img src="logo.jpg" onerror="this.onerror=null; this.src='LOGO OK.jpg';" alt="Logo 915 Gia Sàng" class="w-full h-full object-contain rounded-full">
+          </div>
+          <div>
+            <span class="text-xs tracking-wider uppercase font-semibold text-amber-300">ỦY BAN NHÂN DÂN PHƯỜNG GIA SÀNG</span>
+            <h1 class="text-xl md:text-2xl font-bold tracking-tight uppercase">Phần Mềm Đánh Giá, Xếp Loại KPI Giáo Viên</h1>
+            <p class="text-sm text-blue-200">Đơn vị: Trường Tiểu học và THCS 915 Gia Sàng</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 no-print">
+          <button onclick="window.print()" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-4 py-2 rounded-lg shadow flex items-center gap-2 transition">
+            <i class="fa-solid fa-print"></i> In / Xuất PDF Báo Cáo
+          </button>
+          <button onclick="resetToDefault()" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 rounded-lg text-sm flex items-center gap-1 transition">
+            <i class="fa-solid fa-arrow-rotate-left"></i> Khôi phục mẫu
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <!-- Main Container -->
-  <main id="printArea" class="flex-grow max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 w-full">
+  <!-- Main Container -->
+  <main id="printArea" class="flex-grow max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 w-full">
 
-    <!-- Thông tin người đánh giá -->
-    <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
-      <div class="flex items-center gap-2 border-b pb-3 mb-4 text-blue-800">
-        <i class="fa-solid fa-id-card text-xl"></i>
-        <h2 class="text-lg font-bold uppercase">Thông Tin Cán Bộ / Giáo Viên Tự Đánh Giá</h2>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        <div>
-          <label class="block text-xs font-semibold text-slate-500 mb-1">Họ và tên giáo viên</label>
-          <input type="text" id="gvName" value="Nguyễn Thị Thu Trà" class="w-full font-medium border border-slate-300 rounded px-3 py-1.5 focus:ring-2 focus:ring-blue-500 outline-none">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-500 mb-1">Chức vụ / Vị trí việc làm</label>
-          <input type="text" id="gvPos" value="Giáo viên Tin học" class="w-full font-medium border border-slate-300 rounded px-3 py-1.5 focus:ring-2 focus:ring-blue-500 outline-none">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-500 mb-1">Tổ bộ môn / Đơn vị</label>
-          <input type="text" id="gvGroup" value="Tổ Chuyên Môn THCS" class="w-full font-medium border border-slate-300 rounded px-3 py-1.5 focus:ring-2 focus:ring-blue-500 outline-none">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-500 mb-1">Kỳ / Tháng đánh giá</label>
-          <input type="text" id="gvPeriod" value="Tháng 09 / Học kỳ I" class="w-full font-medium border border-slate-300 rounded px-3 py-1.5 focus:ring-2 focus:ring-blue-500 outline-none">
-        </div>
-      </div>
-    </section>
+    <!-- Thông tin người đánh giá -->
+    <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
+      <div class="flex items-center gap-2 border-b pb-3 mb-4 text-blue-800">
+        <i class="fa-solid fa-id-card text-xl"></i>
+        <h2 class="text-lg font-bold uppercase">Thông Tin Cán Bộ / Giáo Viên Tự Đánh Giá</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Họ và tên giáo viên</label>
+          <input type="text" id="gvName" value="Nguyễn Thị Thu Trà" class="w-full font-medium border border-slate-300 rounded px-3 py-1.5 focus:ring-2 focus:ring-blue-500 outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Chức vụ / Vị trí việc làm</label>
+          <input type="text" id="gvPos" value="Giáo viên Tin học" class="w-full font-medium border border-slate-300 rounded px-3 py-1.5 focus:ring-2 focus:ring-blue-500 outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Tổ bộ môn / Đơn vị</label>
+          <input type="text" id="gvGroup" value="Tổ Chuyên Môn THCS" class="w-full font-medium border border-slate-300 rounded px-3 py-1.5 focus:ring-2 focus:ring-blue-500 outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Kỳ / Tháng đánh giá</label>
+          <input type="text" id="gvPeriod" value="Tháng 09 / Học kỳ I" class="w-full font-medium border border-slate-300 rounded px-3 py-1.5 focus:ring-2 focus:ring-blue-500 outline-none">
+        </div>
+      </div>
+    </section>
 
-    <!-- Tóm tắt kết quả (Score Summary Dashboard) -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-      <div class="bg-gradient-to-br from-blue-600 to-blue-700 text-white p-4 rounded-xl shadow-sm">
-        <div class="text-xs uppercase font-medium text-blue-100">Điểm Tiêu chí chung (A)</div>
-        <div class="text-2xl font-bold mt-1"><span id="displayScoreA">30.0</span> / 30</div>
-        <div class="text-xs text-blue-200 mt-1">Phẩm chất, đạo đức, kỷ luật</div>
-      </div>
-      <div class="bg-gradient-to-br from-emerald-600 to-emerald-700 text-white p-4 rounded-xl shadow-sm">
-        <div class="text-xs uppercase font-medium text-emerald-100">Điểm Thực hiện nhiệm vụ (B)</div>
-        <div class="text-2xl font-bold mt-1"><span id="displayScoreB">70.0</span> / 70</div>
-        <div class="text-xs text-emerald-200 mt-1">10 nhiệm vụ chuyên môn theo chuẩn</div>
-      </div>
-      <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white p-4 rounded-xl shadow-sm">
-        <div class="text-xs uppercase font-medium text-purple-100">Tổng điểm KPI</div>
-        <div class="text-2xl font-bold mt-1"><span id="displayTotalScore">100.0</span> / 100</div>
-        <div class="text-xs text-purple-200 mt-1">Tổng cộng (A + B)</div>
-      </div>
-      <div class="bg-gradient-to-br from-amber-500 to-amber-600 text-white p-4 rounded-xl shadow-sm flex flex-col justify-between">
-        <div>
-          <div class="text-xs uppercase font-medium text-amber-100">Xếp loại dự kiến</div>
-          <div class="text-xl font-bold mt-1" id="displayRank">Hoàn thành xuất sắc</div>
-        </div>
-        <span class="inline-block bg-amber-700/50 text-[11px] px-2 py-0.5 rounded w-fit text-amber-100 font-semibold" id="displayRankBadge">Tự đánh giá</span>
-      </div>
-    </section>
+    <!-- Tóm tắt kết quả (Score Summary Dashboard) -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="bg-gradient-to-br from-blue-600 to-blue-700 text-white p-4 rounded-xl shadow-sm">
+        <div class="text-xs uppercase font-medium text-blue-100">Điểm Tiêu chí chung (A)</div>
+        <div class="text-2xl font-bold mt-1"><span id="displayScoreA">30.0</span> / 30</div>
+        <div class="text-xs text-blue-200 mt-1">Phẩm chất, đạo đức, kỷ luật</div>
+      </div>
+      <div class="bg-gradient-to-br from-emerald-600 to-emerald-700 text-white p-4 rounded-xl shadow-sm">
+        <div class="text-xs uppercase font-medium text-emerald-100">Điểm Thực hiện nhiệm vụ (B)</div>
+        <div class="text-2xl font-bold mt-1"><span id="displayScoreB">70.0</span> / 70</div>
+        <div class="text-xs text-emerald-200 mt-1">10 nhiệm vụ chuyên môn theo chuẩn</div>
+      </div>
+      <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white p-4 rounded-xl shadow-sm">
+        <div class="text-xs uppercase font-medium text-purple-100">Tổng điểm KPI</div>
+        <div class="text-2xl font-bold mt-1"><span id="displayTotalScore">100.0</span> / 100</div>
+        <div class="text-xs text-purple-200 mt-1">Tổng cộng (A + B)</div>
+      </div>
+      <div class="bg-gradient-to-br from-amber-500 to-amber-600 text-white p-4 rounded-xl shadow-sm flex flex-col justify-between">
+        <div>
+          <div class="text-xs uppercase font-medium text-amber-100">Xếp loại dự kiến</div>
+          <div class="text-xl font-bold mt-1" id="displayRank">Hoàn thành xuất sắc</div>
+        </div>
+        <span class="inline-block bg-amber-700/50 text-[11px] px-2 py-0.5 rounded w-fit text-amber-100 font-semibold" id="displayRankBadge">Tự đánh giá</span>
+      </div>
+    </section>
 
-    <!-- Navigation Tabs -->
-    <div class="flex border-b border-slate-200 mb-6 bg-white rounded-t-xl px-4 pt-2 shadow-sm gap-2 no-print">
-      <button onclick="switchTab('tabPL2')" id="btnTabPL2" class="py-2.5 px-4 font-bold text-sm border-b-2 border-blue-600 text-blue-600 flex items-center gap-2">
-        <i class="fa-solid fa-list-check"></i> Phụ lục 2: Bảng chấm điểm KPI (100đ)
-      </button>
-      <button onclick="switchTab('tabPL3')" id="btnTabPL3" class="py-2.5 px-4 font-medium text-sm text-slate-500 hover:text-blue-600 flex items-center gap-2 border-b-2 border-transparent">
-        <i class="fa-solid fa-chart-pie"></i> Phụ lục 3: Tự đánh giá theo 6 Trục tiêu chí
-      </button>
-    </div>
+    <!-- Navigation Tabs -->
+    <div class="flex border-b border-slate-200 mb-6 bg-white rounded-t-xl px-4 pt-2 shadow-sm gap-2 no-print">
+      <button onclick="switchTab('tabPL2')" id="btnTabPL2" class="py-2.5 px-4 font-bold text-sm border-b-2 border-blue-600 text-blue-600 flex items-center gap-2">
+        <i class="fa-solid fa-list-check"></i> Phụ lục 2: Bảng chấm điểm KPI (100đ)
+      </button>
+      <button onclick="switchTab('tabPL3')" id="btnTabPL3" class="py-2.5 px-4 font-medium text-sm text-slate-500 hover:text-blue-600 flex items-center gap-2 border-b-2 border-transparent">
+        <i class="fa-solid fa-chart-pie"></i> Phụ lục 3: Tự đánh giá theo 6 Trục tiêu chí
+      </button>
+    </div>
 
-    <!-- TAB 1: BẢNG CHẤM ĐIỂM KPI (PHỤ LỤC 2) -->
-    <div id="tabPL2">
-      <!-- PHẦN A: TIÊU CHÍ CHUNG (30 ĐIỂM) -->
-      <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
-        <div class="flex justify-between items-center border-b pb-3 mb-4">
-          <h3 class="text-base font-bold text-slate-800 uppercase flex items-center gap-2">
-            <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs">PHẦN A</span>
-            Tiêu chí chung về phẩm chất chính trị, đạo đức & tác phong (Tối đa 30 điểm)
-          </h3>
-          <span class="text-sm font-bold text-blue-700">Tổng điểm A: <span id="sumScoreA">30</span>/30</span>
-        </div>
-        <div class="space-y-4">
-          <!-- A1 -->
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-3 bg-slate-50 rounded-lg border border-slate-200 gap-3">
-            <div class="flex-1">
-              <div class="font-semibold text-sm text-slate-800">1. Tư tưởng chính trị, đạo đức, lối sống (Tối đa 10đ)</div>
-              <p class="text-xs text-slate-500 mt-0.5">Chấp hành tốt chủ trương của Đảng, pháp luật của Nhà nước; giữ gìn đạo đức nhà giáo, đoàn kết nội bộ.</p>
-            </div>
-            <div class="flex items-center gap-2 w-full md:w-auto justify-end">
-              <label class="text-xs text-slate-600 font-medium">Điểm tự chấm:</label>
-              <input type="number" id="scoreA1" min="0" max="10" step="0.5" value="10" onchange="calculateAll()" class="w-20 font-bold text-center border border-slate-300 rounded px-2 py-1 bg-white text-blue-700">
-              <span class="text-xs text-slate-400">/ 10đ</span>
-            </div>
-          </div>
-          <!-- A2 -->
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-3 bg-slate-50 rounded-lg border border-slate-200 gap-3">
-            <div class="flex-1">
-              <div class="font-semibold text-sm text-slate-800">2. Ý thức tổ chức kỷ luật, văn hóa công vụ (Tối đa 10đ)</div>
-              <p class="text-xs text-slate-500 mt-0.5">Chấp hành nội quy, giờ giấc lên lớp, không đi muộn về sớm, tham gia đầy đủ họp Hội đồng sư phạm, sinh hoạt chuyên môn.</p>
-            </div>
-            <div class="flex items-center gap-2 w-full md:w-auto justify-end">
-              <label class="text-xs text-slate-600 font-medium">Điểm tự chấm:</label>
-              <input type="number" id="scoreA2" min="0" max="10" step="0.5" value="10" onchange="calculateAll()" class="w-20 font-bold text-center border border-slate-300 rounded px-2 py-1 bg-white text-blue-700">
-              <span class="text-xs text-slate-400">/ 10đ</span>
-            </div>
-          </div>
-          <!-- A3 -->
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-3 bg-slate-50 rounded-lg border border-slate-200 gap-3">
-            <div class="flex-1">
-              <div class="font-semibold text-sm text-slate-800">3. Tác phong, lề lối làm việc & tinh thần đổi mới (Tối đa 10đ)</div>
-              <p class="text-xs text-slate-500 mt-0.5">Thực hiện văn hóa ứng xử "4 xin, 4 luôn", có tinh thần phối hợp công tác, chủ động đổi mới sáng tạo trong phương pháp.</p>
-            </div>
-            <div class="flex items-center gap-2 w-full md:w-auto justify-end">
-              <label class="text-xs text-slate-600 font-medium">Điểm tự chấm:</label>
-              <input type="number" id="scoreA3" min="0" max="10" step="0.5" value="10" onchange="calculateAll()" class="w-20 font-bold text-center border border-slate-300 rounded px-2 py-1 bg-white text-blue-700">
-              <span class="text-xs text-slate-400">/ 10đ</span>
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- TAB 1: BẢNG CHẤM ĐIỂM KPI (PHỤ LỤC 2) -->
+    <div id="tabPL2">
+      <!-- PHẦN A: TIÊU CHÍ CHUNG (30 ĐIỂM) -->
+      <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
+        <div class="flex justify-between items-center border-b pb-3 mb-4">
+          <h3 class="text-base font-bold text-slate-800 uppercase flex items-center gap-2">
+            <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs">PHẦN A</span>
+            Tiêu chí chung về phẩm chất chính trị, đạo đức & tác phong (Tối đa 30 điểm)
+          </h3>
+          <span class="text-sm font-bold text-blue-700">Tổng điểm A: <span id="sumScoreA">30</span>/30</span>
+        </div>
+        <div class="space-y-4">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-3 bg-slate-50 rounded-lg border border-slate-200 gap-3">
+            <div class="flex-1">
+              <div class="font-semibold text-sm text-slate-800">1. Tư tưởng chính trị, đạo đức, lối sống (Tối đa 10đ)</div>
+              <p class="text-xs text-slate-500 mt-0.5">Chấp hành tốt chủ trương của Đảng, pháp luật của Nhà nước; giữ gìn đạo đức nhà giáo, đoàn kết nội bộ.</p>
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+              <label class="text-xs text-slate-600 font-medium">Điểm tự chấm:</label>
+              <input type="number" id="scoreA1" min="0" max="10" step="0.5" value="10" onchange="calculateAll()" class="w-20 font-bold text-center border border-slate-300 rounded px-2 py-1 bg-white text-blue-700">
+              <span class="text-xs text-slate-400">/ 10đ</span>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-3 bg-slate-50 rounded-lg border border-slate-200 gap-3">
+            <div class="flex-1">
+              <div class="font-semibold text-sm text-slate-800">2. Ý thức tổ chức kỷ luật, văn hóa công vụ (Tối đa 10đ)</div>
+              <p class="text-xs text-slate-500 mt-0.5">Chấp hành nội quy, giờ giấc lên lớp, không đi muộn về sớm, tham gia đầy đủ họp Hội đồng sư phạm, sinh hoạt chuyên môn.</p>
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+              <label class="text-xs text-slate-600 font-medium">Điểm tự chấm:</label>
+              <input type="number" id="scoreA2" min="0" max="10" step="0.5" value="10" onchange="calculateAll()" class="w-20 font-bold text-center border border-slate-300 rounded px-2 py-1 bg-white text-blue-700">
+              <span class="text-xs text-slate-400">/ 10đ</span>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-3 bg-slate-50 rounded-lg border border-slate-200 gap-3">
+            <div class="flex-1">
+              <div class="font-semibold text-sm text-slate-800">3. Tác phong, lề lối làm việc & tinh thần đổi mới (Tối đa 10đ)</div>
+              <p class="text-xs text-slate-500 mt-0.5">Thực hiện văn hóa ứng xử "4 xin, 4 luôn", có tinh thần phối hợp công tác, chủ động đổi mới sáng tạo trong phương pháp.</p>
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+              <label class="text-xs text-slate-600 font-medium">Điểm tự chấm:</label>
+              <input type="number" id="scoreA3" min="0" max="10" step="0.5" value="10" onchange="calculateAll()" class="w-20 font-bold text-center border border-slate-300 rounded px-2 py-1 bg-white text-blue-700">
+              <span class="text-xs text-slate-400">/ 10đ</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <!-- PHẦN B: KẾT QUẢ THỰC HIỆN NHIỆM VỤ (70 ĐIỂM) -->
-      <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-3 mb-4 gap-2">
-          <div>
-            <h3 class="text-base font-bold text-slate-800 uppercase flex items-center gap-2">
-              <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-xs">PHẦN B</span>
-              Danh Mục 10 Nhiệm Vụ Chuyên Môn - TH&THCS 915 Gia Sàng (Tối đa 70 điểm)
-            </h3>
-            <p class="text-xs text-slate-500 mt-1">Được chuẩn hóa theo Bộ tiêu chí thi đua trường học & tự động gán vào 6 Trục (Phụ lục 3)</p>
-          </div>
-          <div class="text-right">
-            <span class="text-sm font-bold text-emerald-700">Tổng điểm B: <span id="sumScoreB">70.0</span> / 70đ</span>
-          </div>
-        </div>
+      <!-- PHẦN B: KẾT QUẢ THỰC HIỆN NHIỆM VỤ (70 ĐIỂM) -->
+      <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-3 mb-4 gap-2">
+          <div>
+            <h3 class="text-base font-bold text-slate-800 uppercase flex items-center gap-2">
+              <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-xs">PHẦN B</span>
+              Danh Mục 10 Nhiệm Vụ Chuyên Môn - TH&THCS 915 Gia Sàng (Tối đa 70 điểm)
+            </h3>
+            <p class="text-xs text-slate-500 mt-1">Được chuẩn hóa theo Bộ tiêu chí thi đua trường học & tự động gán vào 6 Trục (Phụ lục 3)</p>
+          </div>
+          <div class="text-right">
+            <span class="text-sm font-bold text-emerald-700">Tổng điểm B: <span id="sumScoreB">70.0</span> / 70đ</span>
+          </div>
+        </div>
 
-        <!-- Bảng công việc chi tiết -->
-        <div class="overflow-x-auto">
-          <table class="w-full text-xs text-left text-slate-600 border border-slate-200">
-            <thead class="text-[11px] text-slate-700 uppercase bg-slate-100 border-b border-slate-200">
-              <tr>
-                <th class="px-2 py-3 text-center w-10">STT</th>
-                <th class="px-3 py-3 min-w-[180px]">Nội dung nhiệm vụ</th>
-                <th class="px-3 py-3 min-w-[140px]">Sản phẩm đầu ra</th>
-                <th class="px-2 py-3 text-center w-16">Tích chuẩn</th>
-                <th class="px-2 py-3 text-center w-24">Độ phức tạp (Hệ số)</th>
-                <th class="px-2 py-3 text-center w-20">Trọng số (Tỷ trọng %)</th>
-                <th class="px-2 py-3 text-center w-24">Mức hoàn thành (%)</th>
-                <th class="px-2 py-3 text-center w-24">Trục gán (PL3)</th>
-                <th class="px-2 py-3 text-center w-20">Điểm đạt</th>
-              </tr>
-            </thead>
-            <tbody id="taskTableBody" class="divide-y divide-slate-200 font-medium">
-              <!-- Các dòng sẽ được render qua JavaScript -->
-            </tbody>
-          </table>
-        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left text-slate-600 border border-slate-200">
+            <thead class="text-[11px] text-slate-700 uppercase bg-slate-100 border-b border-slate-200">
+              <tr>
+                <th class="px-2 py-3 text-center w-10">STT</th>
+                <th class="px-3 py-3 min-w-[180px]">Nội dung nhiệm vụ</th>
+                <th class="px-3 py-3 min-w-[140px]">Sản phẩm đầu ra</th>
+                <th class="px-2 py-3 text-center w-16">Tích chuẩn</th>
+                <th class="px-2 py-3 text-center w-24">Độ phức tạp (Hệ số)</th>
+                <th class="px-2 py-3 text-center w-20">Trọng số (Tỷ trọng %)</th>
+                <th class="px-2 py-3 text-center w-24">Mức hoàn thành (%)</th>
+                <th class="px-2 py-3 text-center w-24">Trục gán (PL3)</th>
+                <th class="px-2 py-3 text-center w-20">Điểm đạt</th>
+              </tr>
+            </thead>
+            <tbody id="taskTableBody" class="divide-y divide-slate-200 font-medium"></tbody>
+          </table>
+        </div>
 
-        <div class="mt-4 p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800 flex items-start gap-2">
-          <i class="fa-solid fa-circle-info text-base mt-0.5 text-amber-600"></i>
-          <div>
-            <strong>Quy tắc tính toán:</strong> Điểm từng nhiệm vụ = <em>(Trọng số % × Tỷ lệ hoàn thành % × Hệ số độ khó) / 100</em>. 
-            Nhiệm vụ 1 được tích chọn làm <strong>Đơn vị chuẩn</strong> (Hệ số 1.0) theo đúng phương pháp quy đổi của tỉnh Thái Nguyên.
-          </div>
-        </div>
-      </section>
-    </div>
+        <div class="mt-4 p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800 flex items-start gap-2">
+          <i class="fa-solid fa-circle-info text-base mt-0.5 text-amber-600"></i>
+          <div>
+            <strong>Quy tắc tính toán:</strong> Điểm từng nhiệm vụ = <em>(Trọng số % × Tỷ lệ hoàn thành % × Hệ số độ khó) / 100</em>. 
+            Nhiệm vụ 1 được tích chọn làm <strong>Đơn vị chuẩn</strong> (Hệ số 1.0) theo đúng phương pháp quy đổi của tỉnh Thái Nguyên.
+          </div>
+        </div>
+      </section>
+    </div>
 
-    <!-- TAB 2: BẢNG TỰ ĐÁNH GIÁ THEO 6 TRỤC (PHỤ LỤC 3) -->
-    <div id="tabPL3" class="hidden">
-      <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
-        <div class="flex justify-between items-center border-b pb-3 mb-4">
-          <div>
-            <h3 class="text-base font-bold text-slate-800 uppercase flex items-center gap-2">
-              <span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-xs">PHỤ LỤC 3</span>
-              Bảng Tổng Hợp Tự Đánh Giá, Xếp Loại Theo 6 Trục Tiêu Chí
-            </h3>
-            <p class="text-xs text-slate-500 mt-1">Điểm nhiệm vụ từ Phụ lục 2 tự động ánh xạ sang 6 trục trọng tâm</p>
-          </div>
-          <span class="text-sm font-bold text-purple-700">Điểm tổng hợp: <span id="displayScorePL3">100.0</span>/100</span>
-        </div>
+    <!-- TAB 2: BẢNG TỰ ĐÁNH GIÁ THEO 6 TRỤC (PHỤ LỤC 3) -->
+    <div id="tabPL3" class="hidden">
+      <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
+        <div class="flex justify-between items-center border-b pb-3 mb-4">
+          <div>
+            <h3 class="text-base font-bold text-slate-800 uppercase flex items-center gap-2">
+              <span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-xs">PHỤ LỤC 3</span>
+              Bảng Tổng Hợp Tự Đánh Giá, Xếp Loại Theo 6 Trục Tiêu Chí
+            </h3>
+            <p class="text-xs text-slate-500 mt-1">Điểm nhiệm vụ từ Phụ lục 2 tự động ánh xạ sang 6 trục trọng tâm</p>
+          </div>
+          <span class="text-sm font-bold text-purple-700">Điểm tổng hợp: <span id="displayScorePL3">100.0</span>/100</span>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="axisCardsContainer">
-          <!-- Sẽ render tự động qua JS -->
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="axisCardsContainer"></div>
 
-        <!-- Đánh giá chức danh quản lý (nếu có) -->
-        <div class="mt-6 border-t pt-4">
-          <div class="flex items-center justify-between">
-            <div>
-              <h4 class="font-bold text-sm text-slate-800 uppercase">Đánh giá Năng Lực Lãnh Đạo, Quản Lý (Dành cho BGH / Tổ trưởng)</h4>
-              <p class="text-xs text-slate-500">Giáo viên trực tiếp giảng dạy không giữ chức vụ quản lý được tự động tính điểm tối đa theo tỷ lệ thực hiện.</p>
-            </div>
-            <div class="flex items-center gap-2">
-              <label class="text-xs font-semibold text-slate-600">Mức hoàn thành:</label>
-              <select id="leaderPerf" onchange="calculateAll()" class="border border-slate-300 rounded px-2 py-1 text-xs font-bold text-blue-700">
-                <option value="1.0" selected>100% (Hoàn thành xuất sắc)</option>
-                <option value="0.9">90% (Hoàn thành tốt)</option>
-                <option value="0.8">80% (Hoàn thành)</option>
-                <option value="0.6">60% (Chưa hoàn thành)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+        <div class="mt-6 border-t pt-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-sm text-slate-800 uppercase">Đánh giá Năng Lực Lãnh Đạo, Quản Lý (Dành cho BGH / Tổ trưởng)</h4>
+              <p class="text-xs text-slate-500">Giáo viên trực tiếp giảng dạy không giữ chức vụ quản lý được tự động tính điểm tối đa theo tỷ lệ thực hiện.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <label class="text-xs font-semibold text-slate-600">Mức hoàn thành:</label>
+              <select id="leaderPerf" onchange="calculateAll()" class="border border-slate-300 rounded px-2 py-1 text-xs font-bold text-blue-700">
+                <option value="1.0" selected>100% (Hoàn thành xuất sắc)</option>
+                <option value="0.9">90% (Hoàn thành tốt)</option>
+                <option value="0.8">80% (Hoàn thành)</option>
+                <option value="0.6">60% (Chưa hoàn thành)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-    <!-- Chữ ký in ấn -->
-    <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mt-6">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center">
-        <div>
-          <div class="text-xs font-bold uppercase text-slate-600">NGƯỜI TỰ ĐÁNH GIÁ</div>
-          <div class="text-xs text-slate-400 italic mb-16">(Ký và ghi rõ họ tên)</div>
-          <div class="font-bold text-sm text-slate-800" id="signTeacherName">Nguyễn Thị Thu Trà</div>
-        </div>
-        <div>
-          <div class="text-xs font-bold uppercase text-slate-600">TỔ TRƯỞNG CHUYÊN MÔN</div>
-          <div class="text-xs text-slate-400 italic mb-16">(Ký nhận xét và đánh giá)</div>
-          <div class="font-bold text-sm text-slate-800">....................................................</div>
-        </div>
-        <div>
-          <div class="text-xs font-bold uppercase text-slate-600">HIỆU TRƯỞNG PHÊ DUYỆT</div>
-          <div class="text-xs text-slate-400 italic mb-16">(Ký tên và đóng dấu)</div>
-          <div class="font-bold text-sm text-slate-800">Trường TH&THCS 915 Gia Sàng</div>
-        </div>
-      </div>
-    </section>
+    <!-- Chữ ký in ấn -->
+    <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mt-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center">
+        <div>
+          <div class="text-xs font-bold uppercase text-slate-600">NGƯỜI TỰ ĐÁNH GIÁ</div>
+          <div class="text-xs text-slate-400 italic mb-16">(Ký và ghi rõ họ tên)</div>
+          <div class="font-bold text-sm text-slate-800" id="signTeacherName">Nguyễn Thị Thu Trà</div>
+        </div>
+        <div>
+          <div class="text-xs font-bold uppercase text-slate-600">TỔ TRƯỞNG CHUYÊN MÔN</div>
+          <div class="text-xs text-slate-400 italic mb-16">(Ký nhận xét và đánh giá)</div>
+          <div class="font-bold text-sm text-slate-800">....................................................</div>
+        </div>
+        <div>
+          <div class="text-xs font-bold uppercase text-slate-600">HIỆU TRƯỞNG PHÊ DUYỆT</div>
+          <div class="text-xs text-slate-400 italic mb-16">(Ký tên và đóng dấu)</div>
+          <div class="font-bold text-sm text-slate-800">Trường TH&THCS 915 Gia Sàng</div>
+        </div>
+      </div>
+    </section>
 
-  </main>
+  </main>
 
-  <!-- Footer Bản Quyền & Tác Giả -->
-  <footer class="bg-slate-900 text-slate-400 text-xs border-t border-slate-800 mt-auto py-6 no-print">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-        <div>
-          <div class="text-white font-bold text-sm mb-1 uppercase tracking-wide flex items-center justify-center md:justify-start gap-2">
-            <i class="fa-solid fa-graduation-cap text-amber-400"></i> BẢN QUYỀN SẢN PHẨM THUỘC VỀ:
-          </div>
-          <p class="text-slate-200 font-semibold">Cô giáo: <span class="text-amber-400 text-sm">NGUYỄN THỊ THU TRÀ</span></p>
-          <p>Giáo viên Tin học - Trường Tiểu học và THCS 915 Gia Sàng, TP. Thái Nguyên</p>
-          <p class="text-slate-400 mt-0.5">
-            <i class="fa-solid fa-award text-blue-400"></i> Chuyên môn: <strong>Đại học Công nghệ Thông tin</strong> & <strong>Đại học Sư phạm Giáo dục Tiểu học</strong>
-          </p>
-        </div>
-        <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-left">
-          <div class="text-slate-300 font-semibold mb-1 text-xs uppercase flex items-center gap-1">
-            <i class="fa-solid fa-address-book text-emerald-400"></i> Kênh hỗ trợ & Liên hệ:
-          </div>
-          <p><i class="fa-solid fa-phone text-slate-400 w-4"></i> Điện thoại: <a href="tel:01971785999" class="text-amber-300 font-bold hover:underline">01971785999</a></p>
-          <p><i class="fa-solid fa-envelope text-slate-400 w-4"></i> Email: <a href="mailto:trantt.915giasang.tn@gmail.com" class="text-blue-300 hover:underline">trantt.915giasang.tn@gmail.com</a></p>
-          <p class="text-[11px] text-slate-500 mt-1">Hệ thống chuẩn hóa phục vụ quản lý chuyên môn nội bộ nhà trường.</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <!-- Footer Bản Quyền & Tác Giả -->
+  <footer class="bg-slate-900 text-slate-400 text-xs border-t border-slate-800 mt-auto py-6 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+        <div>
+          <div class="text-white font-bold text-sm mb-1 uppercase tracking-wide flex items-center justify-center md:justify-start gap-2">
+            <i class="fa-solid fa-graduation-cap text-amber-400"></i> BẢN QUYỀN SẢN PHẨM THUỘC VỀ:
+          </div>
+          <p class="text-slate-200 font-semibold">Cô giáo: <span class="text-amber-400 text-sm">NGUYỄN THỊ THU TRÀ</span></p>
+          <p>Giáo viên Tin học - Trường Tiểu học và THCS 915 Gia Sàng, TP. Thái Nguyên</p>
+          <p class="text-slate-400 mt-0.5">
+            <i class="fa-solid fa-award text-blue-400"></i> Chuyên môn: <strong>Đại học Công nghệ Thông tin</strong> & <strong>Đại học Sư phạm Giáo dục Tiểu học</strong>
+          </p>
+        </div>
+        <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-left">
+          <div class="text-slate-300 font-semibold mb-1 text-xs uppercase flex items-center gap-1">
+            <i class="fa-solid fa-address-book text-emerald-400"></i> Kênh hỗ trợ & Liên hệ:
+          </div>
+          <p><i class="fa-solid fa-phone text-slate-400 w-4"></i> Điện thoại: <a href="tel:01971785999" class="text-amber-300 font-bold hover:underline">01971785999</a></p>
+          <p><i class="fa-solid fa-envelope text-slate-400 w-4"></i> Email: <a href="mailto:trantt.915giasang.tn@gmail.com" class="text-blue-300 hover:underline">trantt.915giasang.tn@gmail.com</a></p>
+          <p class="text-[11px] text-slate-500 mt-1">Hệ thống chuẩn hóa phục vụ quản lý chuyên môn nội bộ nhà trường.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-  <!-- Script Logic tính điểm tự động -->
-  <script>
-    // Dữ liệu 10 tiêu chí chuyên môn trường TH&THCS 915 Gia Sàng
-    const initialTasks = [
-      {
-        id: 1,
-        title: "Giảng dạy & giáo dục học sinh theo định mức",
-        output: "Lịch báo giảng, sổ đầu bài, giờ dạy hoàn thành",
-        isStandard: true,
-        diffLevel: 1.0,
-        weight: 15,
-        perf: 100,
-        axis: 1
-      },
-      {
-        id: 2,
-        title: "Xây dựng KHDH & Kế hoạch bài dạy (Giáo án)",
-        output: "Giáo án đẩy duyệt VnEdu tích hợp STEM/năng lực số",
-        isStandard: false,
-        diffLevel: 1.1,
-        weight: 10,
-        perf: 100,
-        axis: 1
-      },
-      {
-        id: 3,
-        title: "Kiểm tra, đánh giá & quản lý hồ sơ sổ sách điện tử",
-        output: "Sổ điểm VnEdu, nhận xét, học bạ số đúng hạn",
-        isStandard: false,
-        diffLevel: 1.0,
-        weight: 8,
-        perf: 100,
-        axis: 1
-      },
-      {
-        id: 4,
-        title: "Thực hiện công tác kiểm tra nội bộ, thanh tra",
-        output: "Biên bản dự giờ, biên bản KTNB có nhận xét",
-        isStandard: false,
-        diffLevel: 1.1,
-        weight: 5,
-        perf: 100,
-        axis: 2
-      },
-      {
-        id: 5,
-        title: "Ứng dụng CNTT, CĐS & chữ ký số SmartCA/VNPT",
-        output: "Ký số học bạ, bài giảng tương tác, ứng dụng AI",
-        isStandard: false,
-        diffLevel: 1.2,
-        weight: 8,
-        perf: 100,
-        axis: 3
-      },
-      {
-        id: 6,
-        title: "Nghiên cứu khoa học & Viết Sáng kiến kinh nghiệm",
-        output: "Đề tài SKKN / Biện pháp nâng cao chất lượng",
-        isStandard: false,
-        diffLevel: 1.3,
-        weight: 6,
-        perf: 100,
-        axis: 3
-      },
-      {
-        id: 7,
-        title: "Học tập Nghị quyết, công tác Đảng & Đoàn thể",
-        output: "Bài thu hoạch, biên bản sinh hoạt, cam kết",
-        isStandard: false,
-        diffLevel: 1.0,
-        weight: 5,
-        perf: 100,
-        axis: 4
-      },
-      {
-        id: 8,
-        title: "Giáo dục đạo đức, kỹ năng sống & tư vấn học đường",
-        output: "Sổ chủ nhiệm, kế hoạch tư vấn, hỗ trợ HS",
-        isStandard: false,
-        diffLevel: 1.1,
-        weight: 5,
-        perf: 100,
-        axis: 5
-      },
-      {
-        id: 9,
-        title: "Tổ chức phong trào văn nghệ, TDTT, giải đấu",
-        output: "Kế hoạch & kết quả giải Pickleball, bóng đá, STEM",
-        isStandard: false,
-        diffLevel: 1.1,
-        weight: 4,
-        perf: 100,
-        axis: 5
-      },
-      {
-        id: 10,
-        title: "Đảm bảo an ninh trật tự, an toàn, trực cổng trường",
-        output: "Lịch trực cổng trường, nền nếp an toàn giao thông",
-        isStandard: false,
-        diffLevel: 1.0,
-        weight: 4,
-        perf: 100,
-        axis: 6
-      }
-    ];
+  <script>
+    const initialTasks = [
+      { id: 1, title: "Giảng dạy & giáo dục học sinh theo định mức", output: "Lịch báo giảng, sổ đầu bài, giờ dạy hoàn thành", isStandard: true, diffLevel: 1.0, weight: 15, perf: 100, axis: 1 },
+      { id: 2, title: "Xây dựng KHDH & Kế hoạch bài dạy (Giáo án)", output: "Giáo án đẩy duyệt VnEdu tích hợp STEM/năng lực số", isStandard: false, diffLevel: 1.1, weight: 10, perf: 100, axis: 1 },
+      { id: 3, title: "Kiểm tra, đánh giá & quản lý hồ sơ sổ sách điện tử", output: "Sổ điểm VnEdu, nhận xét, học bạ số đúng hạn", isStandard: false, diffLevel: 1.0, weight: 8, perf: 100, axis: 1 },
+      { id: 4, title: "Thực hiện công tác kiểm tra nội bộ, thanh tra", output: "Biên bản dự giờ, biên bản KTNB có nhận xét", isStandard: false, diffLevel: 1.1, weight: 5, perf: 100, axis: 2 },
+      { id: 5, title: "Ứng dụng CNTT, CĐS & chữ ký số SmartCA/VNPT", output: "Ký số học bạ, bài giảng tương tác, ứng dụng AI", isStandard: false, diffLevel: 1.2, weight: 8, perf: 100, axis: 3 },
+      { id: 6, title: "Nghiên cứu khoa học & Viết Sáng kiến kinh nghiệm", output: "Đề tài SKKN / Biện pháp nâng cao chất lượng", isStandard: false, diffLevel: 1.3, weight: 6, perf: 100, axis: 3 },
+      { id: 7, title: "Học tập Nghị quyết, công tác Đảng & Đoàn thể", output: "Bài thu hoạch, biên bản sinh hoạt, cam kết", isStandard: false, diffLevel: 1.0, weight: 5, perf: 100, axis: 4 },
+      { id: 8, title: "Giáo dục đạo đức, kỹ năng sống & tư vấn học đường", output: "Sổ chủ nhiệm, kế hoạch tư vấn, hỗ trợ HS", isStandard: false, diffLevel: 1.1, weight: 5, perf: 100, axis: 5 },
+      { id: 9, title: "Tổ chức phong trào văn nghệ, TDTT, giải đấu", output: "Kế hoạch & kết quả giải Pickleball, bóng đá, STEM", isStandard: false, diffLevel: 1.1, weight: 4, perf: 100, axis: 5 },
+      { id: 10, title: "Đảm bảo an ninh trật tự, an toàn, trực cổng trường", output: "Lịch trực cổng trường, nền nếp an toàn giao thông", isStandard: false, diffLevel: 1.0, weight: 4, perf: 100, axis: 6 }
+    ];
 
-    const axesNames = {
-      1: "Trục 1: Kinh tế - Xã hội & Nhiệm vụ chính trị giáo dục",
-      2: "Trục 2: Xây dựng nền nếp kỷ cương & Kiểm tra giám sát",
-      3: "Trục 3: KHCN, Đổi mới sáng tạo & Chuyển đổi số giáo dục",
-      4: "Trục 4: Xây dựng Đảng & Hệ thống chính trị trường học",
-      5: "Trục 5: Phát triển văn hóa học đường, TDTT & An sinh học sinh",
-      6: "Trục 6: Quốc phòng, an ninh, an toàn trường học"
-    };
+    const axesNames = {
+      1: "Trục 1: Kinh tế - Xã hội & Nhiệm vụ chính trị giáo dục",
+      2: "Trục 2: Xây dựng nền nếp kỷ cương & Kiểm tra giám sát",
+      3: "Trục 3: KHCN, Đổi mới sáng tạo & Chuyển đổi số giáo dục",
+      4: "Trục 4: Xây dựng Đảng & Hệ thống chính trị trường học",
+      5: "Trục 5: Phát triển văn hóa học đường, TDTT & An sinh học sinh",
+      6: "Trục 6: Quốc phòng, an ninh, an toàn trường học"
+    };
 
-    let tasks = JSON.parse(localStorage.getItem("kpi_915_tasks")) || JSON.parse(JSON.stringify(initialTasks));
+    let tasks = JSON.parse(localStorage.getItem("kpi_915_tasks")) || JSON.parse(JSON.stringify(initialTasks));
 
-    function renderTasks() {
-      const tbody = document.getElementById("taskTableBody");
-      tbody.innerHTML = "";
+    function renderTasks() {
+      const tbody = document.getElementById("taskTableBody");
+      tbody.innerHTML = "";
 
-      tasks.forEach((task, index) => {
-        const score = ((task.weight * (task.perf / 100)) * task.diffLevel).toFixed(1);
-        const tr = document.createElement("tr");
-        tr.className = index % 2 === 0 ? "bg-white hover:bg-slate-50" : "bg-slate-50/70 hover:bg-slate-100";
-        tr.innerHTML = `
-          <td class="px-2 py-2.5 text-center font-bold text-slate-700">${index + 1}</td>
-          <td class="px-3 py-2.5 font-semibold text-slate-800">
-            <input type="text" value="${task.title}" onchange="updateTask(${index}, 'title', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-blue-500 outline-none">
-          </td>
-          <td class="px-3 py-2.5 text-slate-500">
-            <input type="text" value="${task.output}" onchange="updateTask(${index}, 'output', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-blue-500 outline-none text-xs">
-          </td>
-          <td class="px-2 py-2.5 text-center">
-            <input type="radio" name="standardTask" ${task.isStandard ? "checked" : ""} onchange="setStandardTask(${index})" title="Chọn làm công việc chuẩn mốc hệ số 1.0">
-          </td>
-          <td class="px-2 py-2.5 text-center">
-            <input type="number" step="0.1" min="0.5" max="2.0" value="${task.diffLevel}" onchange="updateTask(${index}, 'diffLevel', parseFloat(this.value))" class="w-14 text-center border rounded px-1 py-0.5 bg-white font-semibold">
-          </td>
-          <td class="px-2 py-2.5 text-center">
-            <input type="number" min="1" max="100" value="${task.weight}" onchange="updateTask(${index}, 'weight', parseFloat(this.value))" class="w-14 text-center border rounded px-1 py-0.5 bg-white font-semibold">
-          </td>
-          <td class="px-2 py-2.5 text-center">
-            <input type="number" min="0" max="100" value="${task.perf}" onchange="updateTask(${index}, 'perf', parseFloat(this.value))" class="w-14 text-center border rounded px-1 py-0.5 bg-white font-bold text-emerald-600">
-          </td>
-          <td class="px-2 py-2.5 text-center">
-            <select onchange="updateTask(${index}, 'axis', parseInt(this.value))" class="border rounded px-1 py-0.5 text-[11px] bg-white text-slate-700">
-              <option value="1" ${task.axis === 1 ? "selected" : ""}>Trục 1</option>
-              <option value="2" ${task.axis === 2 ? "selected" : ""}>Trục 2</option>
-              <option value="3" ${task.axis === 3 ? "selected" : ""}>Trục 3</option>
-              <option value="4" ${task.axis === 4 ? "selected" : ""}>Trục 4</option>
-              <option value="5" ${task.axis === 5 ? "selected" : ""}>Trục 5</option>
-              <option value="6" ${task.axis === 6 ? "selected" : ""}>Trục 6</option>
-            </select>
-          </td>
-          <td class="px-2 py-2.5 text-center font-bold text-blue-700" id="taskScore_${index}">
-            ${score}
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-      calculateAll();
-    }
+      tasks.forEach((task, index) => {
+        const score = ((task.weight * (task.perf / 100)) * task.diffLevel).toFixed(1);
+        const tr = document.createElement("tr");
+        tr.className = index % 2 === 0 ? "bg-white hover:bg-slate-50" : "bg-slate-50/70 hover:bg-slate-100";
+        tr.innerHTML = `
+          <td class="px-2 py-2.5 text-center font-bold text-slate-700">${index + 1}</td>
+          <td class="px-3 py-2.5 font-semibold text-slate-800">
+            <input type="text" value="${task.title}" onchange="updateTask(${index}, 'title', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-blue-500 outline-none">
+          </td>
+          <td class="px-3 py-2.5 text-slate-500">
+            <input type="text" value="${task.output}" onchange="updateTask(${index}, 'output', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-blue-500 outline-none text-xs">
+          </td>
+          <td class="px-2 py-2.5 text-center">
+            <input type="radio" name="standardTask" ${task.isStandard ? "checked" : ""} onchange="setStandardTask(${index})" title="Chọn làm công việc chuẩn mốc hệ số 1.0">
+          </td>
+          <td class="px-2 py-2.5 text-center">
+            <input type="number" step="0.1" min="0.5" max="2.0" value="${task.diffLevel}" onchange="updateTask(${index}, 'diffLevel', parseFloat(this.value))" class="w-14 text-center border rounded px-1 py-0.5 bg-white font-semibold">
+          </td>
+          <td class="px-2 py-2.5 text-center">
+            <input type="number" min="1" max="100" value="${task.weight}" onchange="updateTask(${index}, 'weight', parseFloat(this.value))" class="w-14 text-center border rounded px-1 py-0.5 bg-white font-semibold">
+          </td>
+          <td class="px-2 py-2.5 text-center">
+            <input type="number" min="0" max="100" value="${task.perf}" onchange="updateTask(${index}, 'perf', parseFloat(this.value))" class="w-14 text-center border rounded px-1 py-0.5 bg-white font-bold text-emerald-600">
+          </td>
+          <td class="px-2 py-2.5 text-center">
+            <select onchange="updateTask(${index}, 'axis', parseInt(this.value))" class="border rounded px-1 py-0.5 text-[11px] bg-white text-slate-700">
+              <option value="1" ${task.axis === 1 ? "selected" : ""}>Trục 1</option>
+              <option value="2" ${task.axis === 2 ? "selected" : ""}>Trục 2</option>
+              <option value="3" ${task.axis === 3 ? "selected" : ""}>Trục 3</option>
+              <option value="4" ${task.axis === 4 ? "selected" : ""}>Trục 4</option>
+              <option value="5" ${task.axis === 5 ? "selected" : ""}>Trục 5</option>
+              <option value="6" ${task.axis === 6 ? "selected" : ""}>Trục 6</option>
+            </select>
+          </td>
+          <td class="px-2 py-2.5 text-center font-bold text-blue-700" id="taskScore_${index}">${score}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      calculateAll();
+    }
 
-    function setStandardTask(selectedIndex) {
-      tasks.forEach((t, i) => {
-        t.isStandard = (i === selectedIndex);
-        if (t.isStandard) t.diffLevel = 1.0;
-      });
-      saveTasks();
-      renderTasks();
-    }
+    function setStandardTask(selectedIndex) {
+      tasks.forEach((t, i) => {
+        t.isStandard = (i === selectedIndex);
+        if (t.isStandard) t.diffLevel = 1.0;
+      });
+      saveTasks();
+      renderTasks();
+    }
 
-    function updateTask(index, field, value) {
-      tasks[index][field] = value;
-      saveTasks();
-      calculateAll();
-    }
+    function updateTask(index, field, value) {
+      tasks[index][field] = value;
+      saveTasks();
+      calculateAll();
+    }
 
-    function saveTasks() {
-      localStorage.setItem("kpi_915_tasks", JSON.stringify(tasks));
-    }
+    function saveTasks() {
+      localStorage.setItem("kpi_915_tasks", JSON.stringify(tasks));
+    }
 
-    function resetToDefault() {
-      if (confirm("Chị có chắc muốn khôi phục lại bảng 10 tiêu chí ban đầu của Trường TH&THCS 915 Gia Sàng không?")) {
-        tasks = JSON.parse(JSON.stringify(initialTasks));
-        saveTasks();
-        renderTasks();
-      }
-    }
+    function resetToDefault() {
+      if (confirm("Khôi phục lại bảng 10 tiêu chí ban đầu của Trường TH&THCS 915 Gia Sàng?")) {
+        tasks = JSON.parse(JSON.stringify(initialTasks));
+        saveTasks();
+        renderTasks();
+      }
+    }
 
-    function calculateAll() {
-      // 1. Tính điểm phần A
-      const a1 = parseFloat(document.getElementById("scoreA1").value) || 0;
-      const a2 = parseFloat(document.getElementById("scoreA2").value) || 0;
-      const a3 = parseFloat(document.getElementById("scoreA3").value) || 0;
-      const scoreA = Math.min(30, a1 + a2 + a3);
+    function calculateAll() {
+      const a1 = parseFloat(document.getElementById("scoreA1").value) || 0;
+      const a2 = parseFloat(document.getElementById("scoreA2").value) || 0;
+      const a3 = parseFloat(document.getElementById("scoreA3").value) || 0;
+      const scoreA = Math.min(30, a1 + a2 + a3);
 
-      document.getElementById("sumScoreA").innerText = scoreA.toFixed(1);
-      document.getElementById("displayScoreA").innerText = scoreA.toFixed(1);
+      document.getElementById("sumScoreA").innerText = scoreA.toFixed(1);
+      document.getElementById("displayScoreA").innerText = scoreA.toFixed(1);
 
-      // 2. Tính điểm phần B
-      let rawB = 0;
-      let totalWeight = 0;
-      const axisScores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
-      const axisCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+      let rawB = 0;
+      let totalWeight = 0;
+      const axisScores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+      const axisCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
 
-      tasks.forEach((task, idx) => {
-        const itemScore = (task.weight * (task.perf / 100)) * task.diffLevel;
-        rawB += itemScore;
-        totalWeight += task.weight;
+      tasks.forEach((task, idx) => {
+        const itemScore = (task.weight * (task.perf / 100)) * task.diffLevel;
+        rawB += itemScore;
+        totalWeight += task.weight;
 
-        const tdScore = document.getElementById(`taskScore_${idx}`);
-        if (tdScore) tdScore.innerText = itemScore.toFixed(1);
+        const tdScore = document.getElementById(`taskScore_${idx}`);
+        if (tdScore) tdScore.innerText = itemScore.toFixed(1);
 
-        axisScores[task.axis] = (axisScores[task.axis] || 0) + itemScore;
-        axisCounts[task.axis] = (axisCounts[task.axis] || 0) + 1;
-      });
+        axisScores[task.axis] = (axisScores[task.axis] || 0) + itemScore;
+        axisCounts[task.axis] = (axisCounts[task.axis] || 0) + 1;
+      });
 
-      // Chuẩn hóa điểm phần B tối đa 70
-      let normalizedB = (rawB / (totalWeight || 1)) * 70;
-      normalizedB = Math.min(70, normalizedB);
+      let normalizedB = (rawB / (totalWeight || 1)) * 70;
+      normalizedB = Math.min(70, normalizedB);
 
-      document.getElementById("sumScoreB").innerText = normalizedB.toFixed(1);
-      document.getElementById("displayScoreB").innerText = normalizedB.toFixed(1);
+      document.getElementById("sumScoreB").innerText = normalizedB.toFixed(1);
+      document.getElementById("displayScoreB").innerText = normalizedB.toFixed(1);
 
-      // 3. Tổng điểm
-      const leaderFactor = parseFloat(document.getElementById("leaderPerf").value) || 1.0;
-      const totalKPI = Math.min(100, (scoreA + normalizedB) * leaderFactor);
-      
-      document.getElementById("displayTotalScore").innerText = totalKPI.toFixed(1);
-      document.getElementById("displayScorePL3").innerText = totalKPI.toFixed(1);
+      const leaderFactor = parseFloat(document.getElementById("leaderPerf").value) || 1.0;
+      const totalKPI = Math.min(100, (scoreA + normalizedB) * leaderFactor);
+      
+      document.getElementById("displayTotalScore").innerText = totalKPI.toFixed(1);
+      document.getElementById("displayScorePL3").innerText = totalKPI.toFixed(1);
 
-      // 4. Xếp loại theo tiêu chuẩn Thái Nguyên
-      let rank = "Chưa hoàn thành nhiệm vụ";
-      let badgeClass = "bg-rose-700/50";
-      if (totalKPI >= 90) {
-        rank = "Hoàn thành xuất sắc nhiệm vụ";
-        badgeClass = "bg-amber-700/50";
-      } else if (totalKPI >= 75) {
-        rank = "Hoàn thành tốt nhiệm vụ";
-        badgeClass = "bg-blue-700/50";
-      } else if (totalKPI >= 50) {
-        rank = "Hoàn thành nhiệm vụ";
-        badgeClass = "bg-slate-700/50";
-      }
+      let rank = "Chưa hoàn thành nhiệm vụ";
+      let badgeClass = "bg-rose-700/50";
+      if (totalKPI >= 90) {
+        rank = "Hoàn thành xuất sắc nhiệm vụ";
+        badgeClass = "bg-amber-700/50";
+      } else if (totalKPI >= 75) {
+        rank = "Hoàn thành tốt nhiệm vụ";
+        badgeClass = "bg-blue-700/50";
+      } else if (totalKPI >= 50) {
+        rank = "Hoàn thành nhiệm vụ";
+        badgeClass = "bg-slate-700/50";
+      }
 
-      document.getElementById("displayRank").innerText = rank;
-      document.getElementById("displayRankBadge").className = `inline-block ${badgeClass} text-[11px] px-2 py-0.5 rounded w-fit text-white font-semibold`;
+      document.getElementById("displayRank").innerText = rank;
+      document.getElementById("displayRankBadge").className = `inline-block ${badgeClass} text-[11px] px-2 py-0.5 rounded w-fit text-white font-semibold`;
 
-      // Đồng bộ tên giáo viên ký
-      const nameInput = document.getElementById("gvName").value;
-      document.getElementById("signTeacherName").innerText = nameInput;
+      const nameInput = document.getElementById("gvName").value;
+      document.getElementById("signTeacherName").innerText = nameInput;
 
-      // Render các trục PL3
-      renderAxisCards(axisScores, axisCounts);
-    }
+      renderAxisCards(axisScores, axisCounts);
+    }
 
-    function renderAxisCards(axisScores, axisCounts) {
-      const container = document.getElementById("axisCardsContainer");
-      if (!container) return;
-      container.innerHTML = "";
+    function renderAxisCards(axisScores, axisCounts) {
+      const container = document.getElementById("axisCardsContainer");
+      if (!container) return;
+      container.innerHTML = "";
 
-      for (let i = 1; i <= 6; i++) {
-        const div = document.createElement("div");
-        div.className = "p-4 bg-slate-50 rounded-lg border border-slate-200 flex flex-col justify-between";
-        div.innerHTML = `
-          <div>
-            <div class="flex items-center justify-between mb-1">
-              <span class="font-bold text-xs text-blue-800 uppercase">${axesNames[i]}</span>
-              <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded">${axisCounts[i]} nhiệm vụ</span>
-            </div>
-            <p class="text-xs text-slate-500">Tổng điểm tích lũy được phân bổ vào trục:</p>
-          </div>
-          <div class="mt-3 flex items-baseline justify-between border-t pt-2">
-            <span class="text-xs font-semibold text-slate-600">Điểm quy đổi:</span>
-            <span class="text-lg font-bold text-emerald-600">${axisScores[i].toFixed(1)} <span class="text-xs text-slate-400 font-normal">điểm</span></span>
-          </div>
-        `;
-        container.appendChild(div);
-      }
-    }
+      for (let i = 1; i <= 6; i++) {
+        const div = document.createElement("div");
+        div.className = "p-4 bg-slate-50 rounded-lg border border-slate-200 flex flex-col justify-between";
+        div.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-bold text-xs text-blue-800 uppercase">${axesNames[i]}</span>
+              <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded">${axisCounts[i]} nhiệm vụ</span>
+            </div>
+            <p class="text-xs text-slate-500">Tổng điểm tích lũy được phân bổ vào trục:</p>
+          </div>
+          <div class="mt-3 flex items-baseline justify-between border-t pt-2">
+            <span class="text-xs font-semibold text-slate-600">Điểm quy đổi:</span>
+            <span class="text-lg font-bold text-emerald-600">${axisScores[i].toFixed(1)} <span class="text-xs text-slate-400 font-normal">điểm</span></span>
+          </div>
+        `;
+        container.appendChild(div);
+      }
+    }
 
-    function switchTab(tabId) {
-      const isPL2 = tabId === 'tabPL2';
-      document.getElementById('tabPL2').classList.toggle('hidden', !isPL2);
-      document.getElementById('tabPL3').classList.toggle('hidden', isPL2);
+    function switchTab(tabId) {
+      const isPL2 = tabId === 'tabPL2';
+      document.getElementById('tabPL2').classList.toggle('hidden', !isPL2);
+      document.getElementById('tabPL3').classList.toggle('hidden', isPL2);
 
-      document.getElementById('btnTabPL2').className = isPL2 
-        ? "py-2.5 px-4 font-bold text-sm border-b-2 border-blue-600 text-blue-600 flex items-center gap-2"
-        : "py-2.5 px-4 font-medium text-sm text-slate-500 hover:text-blue-600 flex items-center gap-2 border-b-2 border-transparent";
+      document.getElementById('btnTabPL2').className = isPL2 
+        ? "py-2.5 px-4 font-bold text-sm border-b-2 border-blue-600 text-blue-600 flex items-center gap-2"
+        : "py-2.5 px-4 font-medium text-sm text-slate-500 hover:text-blue-600 flex items-center gap-2 border-b-2 border-transparent";
 
-      document.getElementById('btnTabPL3').className = !isPL2 
-        ? "py-2.5 px-4 font-bold text-sm border-b-2 border-blue-600 text-blue-600 flex items-center gap-2"
-        : "py-2.5 px-4 font-medium text-sm text-slate-500 hover:text-blue-600 flex items-center gap-2 border-b-2 border-transparent";
-    }
+      document.getElementById('btnTabPL3').className = !isPL2 
+        ? "py-2.5 px-4 font-bold text-sm border-b-2 border-blue-600 text-blue-600 flex items-center gap-2"
+        : "py-2.5 px-4 font-medium text-sm text-slate-500 hover:text-blue-600 flex items-center gap-2 border-b-2 border-transparent";
+    }
 
-    // Khởi tạo ban đầu
-    document.addEventListener("DOMContentLoaded", () => {
-      renderTasks();
-      document.getElementById("gvName").addEventListener("input", (e) => {
-        document.getElementById("signTeacherName").innerText = e.target.value;
-      });
-    });
-  </script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderTasks();
+      document.getElementById("gvName").addEventListener("input", (e) => {
+        document.getElementById("signTeacherName").innerText = e.target.value;
+      });
+    });
+  </script>
 </body>
 </html>
