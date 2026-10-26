@@ -897,7 +897,16 @@
   </style>
 </head>
 <body>
+<script>
+  // Đặt mật khẩu tùy ý của trường ở đây (ví dụ: truong915giasang)
+  var matKhauDung = "915giasang"; 
+  var nhapMK = prompt("Vui lòng nhập mật khẩu để truy cập hệ thống nội bộ:");
 
+  // Kiểm tra nếu nhập sai hoặc bấm Hủy
+  if (nhapMK !== matKhauDung) {
+      document.body.innerHTML = "<h2 style='text-align:center; margin-top:20px; color:red;'>Mật khẩu không đúng! Bạn không có quyền truy cập trang web này.</h2>";
+  }
+</script>
   <!-- HEADER NỀN XANH LỤC - CHỮ CAM -->
   <header>
     <div class="header-container">
